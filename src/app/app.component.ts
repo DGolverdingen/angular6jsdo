@@ -1,10 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { progress } from "@progress/jsdo-core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+  getSessionResult: progress.data.JSDOSessionInfo = null;
+
+  async ngOnInit() {
+    const options: progress.GetSessionOptions = {
+      serviceURI: "https://oemobiledemo.progress.com/OEMobileDemoServicesForm",
+      catalogURI:
+        "https://oemobiledemo.progress.com/OEMobileDemoServicesForm/static/SportsService.json",
+      authenticationModel: progress.data.Session.AUTH_TYPE_FORM,
+      username: "formuser",
+      password: "formpassword"
+    };
+
+    try {
+      this.getSessionResult = await progress.data.getSession(options);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
