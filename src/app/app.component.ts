@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { progress } from "../../node_modules/@progress/jsdo/lib/progress.jsdo.js";
+import { progress } from "@progress/jsdo-core";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
